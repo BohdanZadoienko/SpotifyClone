@@ -15,10 +15,10 @@ const SupabaseProvider: React.FC<SupabaseProviderProps> = ({ children }) => {
   );
 
   return (
-    <SessionContextProvider
-      supabaseClient={supabaseClient}
-    ></SessionContextProvider>
+    <SessionContextProvider supabaseClient={supabaseClient}>
+      {children}
+    </SessionContextProvider>
   );
 };
 
-export default SupabaseProvider
+export default SupabaseProvider;
