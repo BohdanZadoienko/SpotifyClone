@@ -3,7 +3,6 @@
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import { useSessionContext } from "@supabase/auth-helpers-react";
-import { error } from "console";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -31,7 +30,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
         .from("liked_songs")
         .select("*")
         .eq("user_id", user.id)
-        .eq("sond_id", songId)
+        .eq("song_id", songId)
         .single();
 
       if (!error && data) {
@@ -62,7 +61,8 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
         setIsLiked(false);
       }
     } else {
-      const { error } = await supabaseClient.from("liked_songs").insert({
+      const { error } = await supabaseClient
+      .from("liked_songs").insert({
         song_id: songId,
         user_id: user.id,
       });
