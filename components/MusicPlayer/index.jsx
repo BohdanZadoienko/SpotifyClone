@@ -5,48 +5,32 @@ import Controls from "./Controls";
 import Player from "./Player";
 import Seekbar from "./Seekbar";
 import VolumeBar from "./VolumeBar";
-
 import usePlayer from "@/hooks/usePlayer";
-import useSound from "use-sound";
 import MediaItem from "../MediaItem";
 import LikeButton from "../LikeButton";
 
-const MusicPlayer = ({song, songUrl, key}) => {
+const MusicPlayer = ({ song, songUrl}) => {
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [seekTime, setSeekTime] = useState(0);
   const [appTime, setAppTime] = useState(0);
   const [volume, setVolume] = useState(1);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
-  const [songDuration, setSongDuration] = useState()
+  const [songDuration, setSongDuration] = useState();
   const player = usePlayer();
 
-
-  const [play, { pause, sound, duration }] = useSound(songUrl, {
-    // duration: duration,
-    volume: volume,
-    onplay: () => setIsPlaying(true),
-    onend: () => {
-      setIsPlaying(false);
-      onPlayNext();
-    },
-    onpause: () => setIsPlaying(false),
-    format: ["mp3"],
-  
-  });
-
   useEffect(() => {
-    sound?.play();
-    return () => {
-      sound?.unload();
-    };
-  }, [sound]);
+    if (songUrl.length) {
+      setIsPlaying(true);
+    }
+  }, [songUrl]);
 
   const handlePlayPause = () => {
     if (!isPlaying) {
-      play();
+      setIsPlaying(true);
     } else {
-      pause();
+      setIsPlaying(false);
     }
   };
 
@@ -75,21 +59,21 @@ const MusicPlayer = ({song, songUrl, key}) => {
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 h-full w-full relative sm:px-12 px-8  items-center justify-between">
+    <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className="flex w-full justify-start">
         <div className="flex items-center gap-x-4">
           <MediaItem data={song} />
           <LikeButton songId={song.id} />
         </div>
       </div>
-      <div className="flex-1 flex flex-col items-center justify-center">
+      <div className="flex-1 flex flex-col md:items-center justify-center items-end">
         <Controls
           isPlaying={isPlaying}
           isActive={isPlaying}
-          repeat={repeat}
-          setRepeat={setRepeat}
-          shuffle={shuffle}
-          setShuffle={setShuffle}
+          // repeat={repeat}
+          // setRepeat={setRepeat}
+          // shuffle={shuffle}
+          // setShuffle={setShuffle}
           currentSongs={songUrl}
           handlePlayPause={handlePlayPause}
           handlePrevSong={handlePrevSong}
@@ -108,8 +92,8 @@ const MusicPlayer = ({song, songUrl, key}) => {
           volume={volume}
           isPlaying={isPlaying}
           seekTime={seekTime}
-          repeat={repeat}
-          currentIndex={song.currentIndex}
+          // repeat={repeat}
+          currentIndex={songUrl}
           onEnded={handleNextSong}
           onTimeUpdate={(event) => setAppTime(event.target.currentTime)}
           onLoadedData={(event) => setSongDuration(event.target.duration)}

@@ -29,8 +29,8 @@ const Player = () => {
         px-4
       "
     >
-      <PlayerContent key={songUrl} song={song} songUrl={songUrl} />
-      {/* <MusicPlayer key={songUrl} song={song} songUrl={songUrl} /> */}
+      {/* <PlayerContent key={songUrl} song={song} songUrl={songUrl} /> */}
+      <MusicPlayer song={song} songUrl={songUrl} />
     </div>
   );
 }
