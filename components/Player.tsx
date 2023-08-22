@@ -5,6 +5,7 @@ import useLoadSongUrl from "@/hooks/useLoadSongUrl";
 import useGetSongById from "@/hooks/useGetSongById";
 
 import PlayerContent from "./PlayerContent";
+import MusicPlayer from './MusicPlayer'
 
 const Player = () => {
   const player = usePlayer();
@@ -29,6 +30,7 @@ const Player = () => {
       "
     >
       <PlayerContent key={songUrl} song={song} songUrl={songUrl} />
+      {/* <MusicPlayer key={songUrl} song={song} songUrl={songUrl} /> */}
     </div>
   );
 }
