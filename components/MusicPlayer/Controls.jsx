@@ -21,7 +21,7 @@ const Controls = ({
   handleNextSong,
 }) => (
   <div className="flex items-center justify-around md:w-36 lg:w-52 2xl:w-75 ">
-    <BsArrowRepeat size={20} color={repeat ? 'white' : ''} onClick={() => setRepeat((prev) => !prev)} className="hidden sm:block cursor-pointer text-neutral-400 hover:text-white transition" />
+    {/* <BsArrowRepeat size={20} color={repeat ? 'white' : ''} onClick={() => setRepeat((prev) => !prev)} className="hidden sm:block cursor-pointer text-neutral-400 hover:text-white transition" /> */}
 
     {currentSongs?.length && (
       <MdSkipPrevious
@@ -53,7 +53,7 @@ const Controls = ({
         onClick={handleNextSong}
       />
     )}
-    <BsShuffle size={20} color={shuffle ? 'white' : ''} onClick={() => setShuffle((prev) => !prev)} className="hidden sm:block cursor-pointer text-neutral-400 hover:text-white transition" />
+    {/* <BsShuffle size={20} color={shuffle ? 'white' : ''} onClick={() => setShuffle((prev) => !prev)} className="hidden sm:block cursor-pointer text-neutral-400 hover:text-white transition" /> */}
   </div>
 );
 
